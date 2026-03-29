@@ -82,7 +82,7 @@ input, button, textarea, select {
     display: flex;
 }
 
-.nav a {
+.nav > li > a {
     display: inline-block;
     padding: 20px;
     color: var(--white);
@@ -92,6 +92,46 @@ input, button, textarea, select {
     font-weight: 700;
     font-size: 1.5rem;
     letter-spacing: 1.1px;
+}
+
+.nav > li {
+    position: relative;
+}
+
+.sub-menu {
+    position: absolute;
+    background-color: var(--white);
+    min-width: 220px;
+    top: 50px;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    scale: 0;
+    transform-origin: 20% top;
+    transition: opacity ease, visibility ease, scale ease;
+    transition-duration: 0.5s;
+}
+
+.sub-menu a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-top: 1px solid #333;
+    height: 44px;
+    padding: 0 25px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1.6rem;
+}
+
+.nav > li:hover .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    scale: 1;
+}
+
+.sub-menu a:hover {
+    color: var(--white);
+    background-color: var(--primary);
 }
 
 .action-wrapper {
@@ -129,6 +169,16 @@ input, button, textarea, select {
 
 .breadcrumb a {
     text-decoration: none;
+    color: inherit;
+    transition: color ease 0.3s;
+}
+
+.breadcrumb li:not(li:last-child) a:hover {
+    color: var(--secondary);
+}
+
+.breadcrumb a:last-child {
+    color: inherit;
 }
 
 .breadcrumb li + li::before {
@@ -201,10 +251,15 @@ input, button, textarea, select {
     padding: 0 25px;
     height: 40px;
     text-decoration: none;
+    transform: translateX(0);
+    color: #000000b3;
+    transition: color ease, transform linear;
+    transition-duration: 0.3s;
 }
 
 .menu a:hover {
     color: var(--secondary);
+    transform: translateX(20px);
 }
 
 /*Main Content */
@@ -226,6 +281,11 @@ input, button, textarea, select {
     padding: 0 14px;
     border-radius: 15px;
     line-height: 30px;
+    border: 1px solid transparent;
+    color: inherit;
+    background-color: transparent;
+    transition: color ease, background-color ease, border ease;
+    transition-duration: 0.5s;
 }
 
 .topics .active a, .topics a:hover{
@@ -257,6 +317,13 @@ input, button, textarea, select {
 .course-item .thumb-wrapper {
     display: block;
     aspect-ratio: 1 / 0.8;
+    overflow: hidden;
+    
+}
+
+.course-item .thumb-wrapper img{
+    transform: scale(1);
+    transition: transform ease 1s;
 }
 
 .course-item .thumb {
@@ -281,6 +348,7 @@ input, button, textarea, select {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: color ease 0.4s;
 }
 
 .course-item .desc {
@@ -327,6 +395,14 @@ input, button, textarea, select {
     color: var(--white);
     border-radius: 30px;
     font-weight: 400;
+}
+
+.course-item:hover .thumb-wrapper img{
+    transform: scale(1.2);
+}
+
+.course-item:hover .title a{
+    color: var(--primary);
 }
 
 
@@ -393,6 +469,7 @@ input, button, textarea, select {
     color: #fff9;
     text-decoration: none;
     line-height: 30px;
+    transition: color ease 0.3s;
 }
 
 .footer-container li p {
@@ -717,6 +794,7 @@ select.find-course-item {
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    transition: border ease 0.4s;
 }
 
 .single-plan-table h2 {
@@ -737,8 +815,9 @@ select.find-course-item {
 
 .single-plan-table .title-price-1 {
     font-size: 3rem;
-         margin-bottom: 34px;
-
+    margin-bottom: 34px;
+    transform: translateY(0);
+    transition: transform ease 0.4s;
 }
 
 .single-plan-table .title-price-2 {
@@ -768,19 +847,30 @@ select.find-course-item {
     border: 1px solid #dddddd;
     border-radius: 20px;
     text-align: center;
+    transform: scaleY(1);
+    transform: translateY(0);
+    transition: transform ease, color ease;
+    transition-duration: 0.4s;
 }
 
 .single-plan-table:hover {
     border: 3px solid var(--secondary);
 }
 
+.single-plan-table:hover .title-price-1 {
+    transform: translateY(-2px);
+}
 .single-plan-table:hover .link-content-plan {
     background-color: var(--secondary);
     color: var(--white);
-    box-shadow: 0 18px 40px #000;
+    transform: scaleY(1.1);
     border: none;
 }
 
+.single-plan-table .link-content-plan:hover {
+    transform: translateY(-10px);
+    box-shadow: rgba(0, 0, 0, 1) 0px 25px 20px -20px;
+}
 /* Status */
 .wrapper-status {
     display: flex;
@@ -839,17 +929,26 @@ select.find-course-item {
     flex-direction: column;
     gap: 20px;
 }
-.news-item img {
-    width: 100%;
+
+.pic-news {
+    display: block;
+    width: 370px;
     height: 260px;
     object-fit: cover;
     border-radius: 10px;
+    overflow: hidden;
+}
+
+.pic-news img {
+    transform: scale(1);
+    transition: transform ease 1s;
 }
 
 .news-item h3 {
     font-size: 1.8rem;
     color: #000000b3;
     line-height: 24px;
+    transition: color ease 0.4s;
 }
 
 .news-item .wrapper-icon-content {
@@ -877,6 +976,9 @@ select.find-course-item {
     border: 1px solid #cecece;
     border-radius: 10px;
     text-align: center;
+    background-color: transparent;
+    transition: color ease, background-color ease;
+    transition-duration: 0.4s;
 }
 
 .news-item:hover h3{
@@ -888,6 +990,9 @@ select.find-course-item {
     color: var(--white);
 }
 
+.news-item:hover .pic-news img {
+    transform: scale(1.2);
+}
 /* Instructor */
 .wrapper-instructor {
     width: 100%;
